@@ -8,3 +8,5 @@
     - The parser and scanner for TS are handwritten.
 
 - Some reasons to not JIT 
+    - I think one reason to not use JIT is that since JITs need to know the architecture of the host machine, there's an additional overhead in determining that and that could hamper compiler speed.
+    - Another reason is that because JITs compile to host architecture machine code and is not specifically targeted to an architecture, there may be some platform specific optimisation that'll increase performance that a JIT compiler will not be able to do, limiting it's performance and maybe portability
