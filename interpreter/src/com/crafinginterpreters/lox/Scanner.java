@@ -117,9 +117,27 @@ import static com.crafinginterpreters.lox.TokenType.*; // Maybe find alternative
                 break;
             
             default:
-                Lox.error(line, "Unexpected Character");
+                if(isDigit(c)) {
+                    number()
+                } else {
+                    Lox.error(line, "Unexpected Character"); }
                 break;
+                    
         }
+    }
+
+    private void number() {
+        while(isDigit(peek())) advance();
+
+        // Look for fractional part
+        if(peek() == '.' && isDigit(peekNext())) { // we  do not want to consume "." until we're sure there's a digit ahead;
+            // consume the "."
+            advance();
+
+            while(isDigit(peek())) advance()
+        }
+
+        addToken(NUMBER, Double.parseDouble(source.substring(start, current)));
     }
 
     private void string() {
@@ -152,6 +170,15 @@ import static com.crafinginterpreters.lox.TokenType.*; // Maybe find alternative
     private char peek() {
         if(isAtEnd()) return '\0';
         return source.charAt(current);
+    }
+
+    private char peekNext() {
+        if(current + 1 >= source.length()) return '\0';
+        return source.charAt(current + 1);
+    }
+
+    private boolean isDigit(char) {
+        return c >= '0' && c <= '9';
     }
 
     private boolean isAtEnd() {
