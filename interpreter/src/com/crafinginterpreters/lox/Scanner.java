@@ -120,9 +120,22 @@ import java.util.Map; // Maybe find alternative to this static import
             //Longer Lexemes
             case '/':
                 if(match('/')) {
-                    // A Comment goes until end of line
-                    while(peek() != '\n' && !isAtEnd()) advance();
-                } else {
+                    while(peek() != '\n' && !isAtEnd()) advance(); // A Comment goes until end of line
+                } else if(match('*')) {
+                    // handling block comments => /* ...  */ style.
+                    while(!isAtEnd()) {
+                        if(peek() == '*' && peekNext() == '/') {
+                            advance(); // consume *
+                            advance(); // consume /   
+                            break;
+                        }
+                        advance();
+                    }
+
+                    if(isAtEnd()) {
+                        Lox.error(line, "Unterminated block comment");
+                    }
+                 } else {
                     addToken(SLASH); }
                 break;
             
