@@ -1,4 +1,4 @@
-package com.crafinginterpreters.lox;
+package com.craftinginterpreters.lox;
 
 enum TokenType { // Keywords of the language grammar; reserved words.
     //Single-character tokens

@@ -1,4 +1,4 @@
-package com.crafinginterpreters.lox;
+package com.craftinginterpreters.lox;
 
 class Token {
 

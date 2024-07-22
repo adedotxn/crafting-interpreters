@@ -1,4 +1,4 @@
-package com.crafinginterpreters.lox;
+package com.craftinginterpreters.lox;
 
 import static com.crafinginterpreters.lox.TokenType.*;
 import java.util.ArrayList;
